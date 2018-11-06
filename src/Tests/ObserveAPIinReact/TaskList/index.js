@@ -19,7 +19,6 @@ import buttonRigth from "./img/buttonRigth.png";
 import buttonLeft from "./img/buttonLeft.png";
 import ArrowDown from "./img/baseline-arrow_downward-24px.svg";
 import ArrowUp from "./img/baseline-arrow_upward-24px.svg";
-import AuthAdminContext from "../../Auth/AuthAdminContext";
 
 import EditIcon from "./img/baseline_edit_black_24dp.png";
 
@@ -69,81 +68,18 @@ const TaskList = ({
               styleClassName={classes.title}
             />
 
-            <AuthAdminContext.Consumer>
-              {authAdmin =>
-                authAdmin ? (
-                  <React.Fragment>
-                    {/** If auntification admin  */}
-                    {/***************************  SHOW  ADMIN TOOLS PANEL ****************************/}
+            <React.Fragment>
+              {/**  status  */}
 
-                    <Grid item xs={4} className={classes.title}>
-                      <Paper>
-                        {/** admin checbox if auth  */}
+              <Grid item xs={4} className={classes.title}>
+                <Paper>status {Status(currentStatus)}</Paper>
+              </Grid>
 
-                        <AdminStatusBox
-                          checkStatus={
-                            <Checkbox
-                              className={classes.checbox}
-                              style={{
-                                width: 40,
-                                height: 40,
-                                position: "relative",
-                                top: "-20%"
-                              }}
-                              color="secondary"
-                              checked={checked}
-                              onChange={handleChange}
-                            />
-                          }
-                          children={Status(currentStatus)}
-                        />
-                      </Paper>
-                    </Grid>
-
-                    <Paper className={classes.editPaper}>
-                      {/** admin tools panel if auth  */}
-
-                      <div>
-                        <EditButton onEdit={onEdit} />
-                        <Button
-                          variant="contained"
-                          color="secondary"
-                          onClick={newSetTaskValue}
-                        >
-                          Submit
-                        </Button>
-                      </div>
-                      {/** admin edit text lable */}
-
-                      {editText ? (
-                        <textarea
-                          name="textValue"
-                          onChange={onChangeText}
-                          defaultValue={userText}
-                        />
-                      ) : (
-                        <Typography variant="inherit">{userText}</Typography>
-                      )}
-                    </Paper>
-
-                    {/**************** FIND ADMIN TOOLS PANEL   *******************/}
-                  </React.Fragment>
-                ) : (
-                  <React.Fragment>
-                    {/**  status  */}
-
-                    <Grid item xs={4} className={classes.title}>
-                      <Paper>status {Status(currentStatus)}</Paper>
-                    </Grid>
-
-                    {/** text task  */}
-                    <Paper className={classes.muiPaper}>
-                      <Typography variant="inherit">{userText}</Typography>
-                    </Paper>
-                  </React.Fragment>
-                )
-              }
-            </AuthAdminContext.Consumer>
+              {/** text task  */}
+              <Paper className={classes.muiPaper}>
+                <Typography variant="inherit">{userText}</Typography>
+              </Paper>
+            </React.Fragment>
           </Grid>
         </Grid>
 
